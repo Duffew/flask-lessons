@@ -1,7 +1,7 @@
 # import os to provide a way to interact with the operating system
 import os
 # import Flask to access the flask modules
-from flask import Flask
+from flask import Flask, render_template
 
 # create an instance of the flask class called 'app'
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app = Flask(__name__)
 # after typing all the following, Flask should run successfully
 @app.route("/")
 def index():
-    return "Hello World"
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(
