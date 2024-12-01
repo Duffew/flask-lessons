@@ -1,6 +1,7 @@
 # ensure 2 blank spaces between each of the python functions
 # import os to provide a way to interact with the operating system
 import os
+import json
 # import Flask to access the flask modules
 from flask import Flask, render_template
 
@@ -18,7 +19,13 @@ def index():
 # create a function that returns about.html when called by defining the route to that file
 @app.route("/about")
 def about():
-    return render_template("about.html", page_title="About")
+    # initialise an empty array to manage the .json data
+    data = []
+    # open the .json file as read only and assign the content to json_data
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+        # pass the data list into the return statement and call it 'company'
+    return render_template("about.html", page_title="About", company=data)
 
 
 # create a function that returns contact.html when called by defining the route to that file
