@@ -18,20 +18,20 @@ def index():
 # create a function that returns about.html when called by defining the route to that file
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html", page_title="About")
 
 
 # create a function that returns contact.html when called by defining the route to that file
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact")
 
 
 # create a function that returns careers.html when called by defining the route to that file
 # add a new link now in base.html and create careers.html - use inheritance to copy the base html
 @app.route("/careers")
 def careers():
-    return render_template("careers.html")
+    return render_template("careers.html", page_title="Careers")
 
 
 if __name__ == "__main__":
