@@ -18,9 +18,12 @@
 
 <!-- use Bootstrap to arrange the page content -->
 <div class="row featurette">
+    <!-- loop.index is a filter within Jinja templating langugae -->
+    {% if loop.index % 2 != 0 %}
+
     <!-- Thoirin section occupies seven spaces of the 12 in Bootstrap grid -->
     <div class="col-md-7">
-        <h3>{{ member.name }}</h3>
+        <h3>{{ loop.index }}. {{ member.name }}</h3>
         <p>
             {{ member.description }}
         </p>
@@ -29,9 +32,30 @@
     <div class="col-md-5">
         <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
     </div>
+
+    {% else %}
+    <!-- revesre the order of display by reversing the HTML - even nummbers now on the right -->
+    <div class="col-md-5">
+        <img src="{{ member.image_source }}" alt="" class="featurette-image image-responsive">
+    </div>
+    <div class="col-md-7">
+        <h3>{{ loop.index }}. {{ member.name }}</h3>
+        <p>
+            {{ member.description }}
+        </p>
+    </div>
+
+    {% endif %}
+
 </div>
 
-<hr class="featurette-divider">
+<!-- prevent horizontal rule after last character bio -->
+
+{% if loop.index != loop.length %}
+
+    <hr class="featurette-divider">
+
+{% endif %}
 
 {% endfor %}
 
