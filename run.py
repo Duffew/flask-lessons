@@ -3,11 +3,13 @@
 import os
 import json
 # import Flask to access the flask modules
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
+if os.path.exists("env.py"):
+    import env
 
 # create an instance of the flask class called 'app'
 app = Flask(__name__)
-
+app.secret_key = os.environ.get("SECRET_KEY")
 
 # when we try to browse to the root directory "/" the index function will trigger
 # after typing all the following, Flask should run successfully
@@ -44,7 +46,9 @@ def about_member(member_name):
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        print(request.form)
+        # now provide a flash message to the user once the form is submitted
+        flash("Thanks {}, we have recieved your message.".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
