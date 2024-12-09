@@ -3,7 +3,7 @@
 import os
 import json
 # import Flask to access the flask modules
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # create an instance of the flask class called 'app'
 app = Flask(__name__)
@@ -41,8 +41,10 @@ def about_member(member_name):
 
 
 # create a function that returns contact.html when called by defining the route to that file
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        print(request.form)
     return render_template("contact.html", page_title="Contact")
 
 
