@@ -28,6 +28,18 @@ def about():
     return render_template("about.html", page_title="About", company=data)
 
 
+# creta a new route which will dispaly additional company member info when heading is clicked
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {}
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+    return render_template("member.html", member=member)
+
+
 # create a function that returns contact.html when called by defining the route to that file
 @app.route("/contact")
 def contact():
